@@ -1,52 +1,49 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 16 13:05:54 2018
+#WARNING
+#i think for (888,1) it should give 32 but it gives 5 
+#which is r=2
 
-@author: msra4bm8
-"""
+
+def sd(n):
+    """
+    Returns the sum of digits of a natural number `n`.
+    Used as an auxiliary function to `sdr`.
+    """
+    res = 0
+    while n > 0:
+        res += n % 10
+        n //= 10
+    return res
+
+
+def sdr(n,r=None):
+    """
+    If `r <= 0`, returns `n`.
+    If `r > 0` returns `sd(sd(...sd(n)...))`, where `sd` is applied `r` times.
+    If `r` is undefined, returns the fixed point of `sd(sd(...sd(n)...))`, which
+    is the first single-digit number that this composition encounters.
+    """
+    n = abs(n)    
     
-    
-def sdn(n,r=None):
-    '''
-    returns the sum of the digits of the input integer r times
-    input: `n` integer, `r` integer
-    output: integer(sum of digits)
-    '''
-    if r==None:
-        while True:        
-            sum_d=0        
-            while n>0:          #basic sd fomr ex1
-                last_d=n%10
-                n=n//10
-                sum_d=sum_d+last_d  
-            r=r-1
-            n=sum_d
-            if sum_d<10:
-                return sum_d
-        
-    elif r>0:    
-        while r>0:
-            sum_d=0         #at every round r the sum goes back to 0
-            while n>0:
-                #basic sd() from ex1
-                last_d=n%10
-                n=n//10
-                sum_d=sum_d+last_d  
-            r=r-1
-            n=sum_d
-        return sum_d
-        
-    elif r<=0:
+    if r is None:
+        while n > 10:
+            n = sd(n)
         return n
+                
+    if r<=0:
+        return n
+        
+    for i in range(n):
+        n = sd(n)
+    return n
+        
+    
     
 def main():
-    b=int(input("give the number of rounds: "))
-    a=int(input("give the number: "))
-    if b<=0:
-        print (a)
-    
-    else: 
-        print(sdn(a,b))
+    n = 8888
+    r = 1
+    print(sd(n))
+    print("sdr(" + str(n) + ", " + str(r) + ") =", sdr(n, r))
+    print("sdr(" + str(n) + ") =", sdr(n))
      
 
 main()
