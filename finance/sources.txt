@@ -1,0 +1,6 @@
+ 
+https://towardsdatascience.com/time-series-analysis-in-python-an-introduction-70d5a5b1d52a
+
+https://towardsdatascience.com/bitcoin-price-prediction-using-lstm-9eb0938c22bd
+
+https://medium.freecodecamp.org/i-built-a-jupyter-notebook-that-will-analyze-cryptocurrency-portfolios-for-you-bdaba618aeca
