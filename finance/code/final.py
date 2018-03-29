@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-TODO: 'kaki' symbol in portfolio1 doesn't raise exception. It goes to the portfolio, but not to the stocks
-'''
 class TransactionError(Exception):
     pass
 
@@ -67,6 +64,8 @@ def loadPortfolio(fname):
     OUTPUT: portfolio dictionary: keys: date, cash, symbols; values: date, cahs, ammount of shares realted to symbols
     '''
     portfolio.clear()       #https://www.tutorialspoint.com/python/dictionary_clear.htm
+    del transactions[:]
+    #portfolio and tranactions cleared out
     import csv
     with open ("/home/boti/botka/a_BOTI_a/study/sem4/python/finance/"+fname+".csv",'r',encoding='utf8',newline='') as csv_file:
         csv_reader = csv.reader(csv_file)
@@ -75,7 +74,7 @@ def loadPortfolio(fname):
         portfolio['date'] = date                #reads the date
         portfolio['cash'] = cash                #reads the cash ammount
         try:
-            for line in csv_reader:             #eads until empty line
+            for line in csv_reader:             #rads until empty line
                 if line == '':
                     break
                 else:                   
@@ -91,8 +90,8 @@ def loadPortfolio(fname):
                         if symb.upper()+'.csv' in list1:                        
                             portfolio[symb] = quant
                             loadStock(symb.upper())                         
-                    else:
-                        raise ValueError()      #not integer -> error                  
+                    #else:
+                        #raise ValueError()      #not integer -> error                  
         except ValueError:
             print('share must be integer :( ')
         except FileNotFoundError:
@@ -100,10 +99,65 @@ def loadPortfolio(fname):
     return
 
 def valuatePortfolio(date=None, verbose=False):
-    if verbose == False:
-        pass
-    return
+    '''
+    Valuates the portfolio at given date. No date -> date in portfolio
+    '''
+    '''
+    TODO: write more efficient code
+          raise exceptions using notes
+          raise another exception if date in the wrong format
+    ''' 
+    #creating new dict with only the symbols for iteration
+    port_symb = {x:portfolio[x] for x in portfolio if x!='date'}
+    port_symb = {x:port_symb[x] for x in port_symb if x!='cash'}
+
+    #now port_symb only contains owned stock symbols
+    
+    if date == None:                                    #converting into proper date format
+        date = normaliseDate(portfolio['date'])
+    else:
+        date = normaliseDate(date)
         
+    '''if date is earlier than date in portfolio: Error'''
+    from datetime import datetime
+    date = [int(x) for x in date.split('-')]            #converting dates into datetime format
+    date_p = portfolio['date']
+    date_p = [int(x) for x in date_p.split('-')]
+    if datetime(date[0],date[1],date[2]) < datetime(date_p[0],date_p[1],date_p[2]):
+        raise DateError
+    else:                                   #converting back to noramliseDate() form
+        date = [str(x) for x in date]
+        date = normaliseDate("-".join(date))
+        
+    '''calculatin the profit'''
+    value = 0
+    cash = portfolio['cash']
+    for keys in port_symb:
+        #if the date is not a trading day -> Error
+        if date not in stocks[keys].keys():
+            print('here')
+            raise DateError
+        value = value + int(port_symb[keys]) * float((stocks[keys][date])[2])
+    value = value + cash
+    
+    if verbose == False:
+        print(value)
+    else:
+        print(' Your portfolio on {} \n [* share values based on the lowest pice on {}] \n'.format(date,date))
+        print(" {0:<21} | {1:^8} | {2:^8} | {3:^10} |".format("Capital type", "Volume", "Val/Unit*","Value in £"))
+        print( "-" * 23 + "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 13)
+        if portfolio['cash'] != 0:
+            print(" {0:<21} | {1:8} | {2:9.2f} | {3:10.2f} |".format('Cash',1,portfolio['cash'],portfolio['cash']))
+        for p_symb, p_vol in port_symb.items():
+            for s_key in stocks.keys():
+                if s_key == p_symb:
+                    print(" {0:<21} | {1:8} |{2:10.2f} | {3:10.2f} |".format(p_symb,p_vol,float((stocks[s_key][date])[2]),int(port_symb[p_symb]) * float((stocks[s_key][date])[2])))
+                else:
+                    continue
+        print( "-" * 23 + "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 13)
+        print(" {0:<21} {1:25} {2:10.2f} ".format('TOTAL VALUE',' ',value))
+       
+    return
 
 
 def test_loadPortfolio():
@@ -118,6 +172,9 @@ def test_loadPortfolio():
 
 def main():
     test_loadPortfolio()
+    #valuatePortfolio()
+    valuatePortfolio(date='2012-01-03', verbose=True)
+    
     return
 
 main()
