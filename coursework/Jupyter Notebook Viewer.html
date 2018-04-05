@@ -1,0 +1,816 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Jupyter Notebook Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="robots" content="noindex,nofollow">
+  
+
+  <!--NEW RELIC Start Perf Measurement-->
+  
+  <!--NREND-->
+
+  <!-- Le styles -->
+  <script src="/cdn-cgi/apps/head/MuIIl4I_IVFkxldaVu1mdWee9as.js"></script><link href="/static/build/styles.css?v=d2f574aebb7720ccb35207ba1db4cfbb" rel="stylesheet">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- Le fav and touch icons -->
+  <link rel="shortcut icon" href="/static/ico/ipynb_icon_16x16.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="/static/ico/apple-touch-icon-144-precomposed.png?v=5a3c9ede93e2a8b8ea9e3f8f3da1a905">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="/static/ico/apple-touch-icon-114-precomposed.png?v=45d86fc8f24dc00638035e1dd7a6d898">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="/static/ico/apple-touch-icon-72-precomposed.png?v=540b5eb0f3cfd25f1439d1c9bd30e15f">
+  <link rel="apple-touch-icon-precomposed"
+        href="/static/ico/apple-touch-icon-57-precomposed.png?v=225f0590e187e1458625654f10a28f56">
+  
+  
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Notebook on nbviewer">
+  <meta name="twitter:description" content="Check out this Jupyter notebook!">
+
+  
+  <meta name="twitter:domain" content="nbviewer.ipython.org">
+  <meta name="twitter:image:src" content="http://ipython.org/ipython-doc/dev/_images/ipynb_icon_128x128.png">
+
+  
+    <link href="/static/build/notebook.css?v=7ff1df8ccee6dd13babbd66843869949" rel="stylesheet">
+  
+
+  
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      init_mathjax = function() {
+        if (window.MathJax) {
+          // MathJax loaded
+          MathJax.Hub.Config({
+            TeX: {
+              equationNumbers: {
+                autoNumber: "AMS",
+                useLabelIds: true
+              }
+            },
+            tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+              displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+              processEscapes: true,
+              processEnvironments: true
+            },
+            displayAlign: 'center',
+            "HTML-CSS": {
+              styles: {'.MathJax_Display': {"margin": 0}},
+              linebreaks: { automatic: true }
+            }
+          });
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+      }
+      init_mathjax();
+    </script>
+  
+
+  
+    <script>
+      (function() {
+        function addWidgetsRenderer() {
+          var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+          var scriptElement = document.createElement('script');
+          var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
+          var widgetState;
+
+          try {
+            widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+            if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+              widgetRendererSrc = 'https://unpkg.com/jupyter-js-widgets@*/dist/embed.js';
+            }
+          } catch(e) {}
+
+          scriptElement.src = widgetRendererSrc;
+          document.body.appendChild(scriptElement);
+        }
+
+        document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+      }());
+    </script>
+  
+
+</head>
+
+<body class="nbviewer">
+
+  <!-- These are loaded at the top of the body so they are available to
+       notebook cells when they are loaded below. -->
+  <script src="/static/components/jquery/dist/jquery.min.js?v=c9f5aeeca3ad37bf2aa006139b935f0a"></script>
+  <script src="/static/components/requirejs/require.js?v=6da8be361b9ee26c5e721e76c6d4afce"></script>
+  <script src="/static/components/moment/min/moment.min.js?v=89f87298ad94aa1e6b92f42eb66da043"></script>
+<!-- Navbar
+================================================== -->
+  <nav id="menubar" class="navbar navbar-default navbar-fixed-top" data-spy="affix">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img src="/static/img/nav_logo.svg?v=479cefe8d932fb14a67b93911b97d70f" width="159"/>
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="active" href="http://jupyter.org">JUPYTER</a>
+          </li>
+          <li>
+    <a href="/faq" title="FAQ" >
+      
+        <span>FAQ</span>
+      
+    </a>
+  </li>
+
+          
+  
+    
+  
+    
+      
+        <li>
+    <a href="/format/script/url/personalpages.manchester.ac.uk/staff/stefan.guettel/py/coursework2018.ipynb" title="View as Code" >
+      <span class="fa fa-code fa-2x menu-icon"></span>
+      <span class="menu-text">View as Code</span>
+    </a>
+  </li>
+      
+    
+  
+
+  
+    <li>
+    <a href="#" title="Python 3 Kernel" >
+      <span class="fa fa-server fa-2x menu-icon"></span>
+      <span class="menu-text">Python 3 Kernel</span>
+    </a>
+  </li>
+  
+
+  
+
+  <li>
+    <a href="http://personalpages.manchester.ac.uk/staff/stefan.guettel/py/coursework2018.ipynb" title="Download Notebook" download>
+      <span class="fa fa-download fa-2x menu-icon"></span>
+      <span class="menu-text">Download Notebook</span>
+    </a>
+  </li>
+
+        </ul>
+      </div><!-- /.navbar-collapse -->
+      
+      
+    </div>
+  </nav>
+
+  <div class="container container-main">
+    
+  
+  <div id="notebook">
+    <div id="notebook-container">
+      
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="MATH20662-Coursework-2018-(Dr-Stefan-G&#252;ttel)">MATH20662 Coursework 2018 (<a href="http://guettel.com">Dr Stefan G&#252;ttel</a>)<a class="anchor-link" href="#MATH20662-Coursework-2018-(Dr-Stefan-G&#252;ttel)">&#182;</a></h3><h1 id="stocktrader:-A-Python-module-for-virtual-stock-trading">stocktrader: A Python module for virtual stock trading<a class="anchor-link" href="#stocktrader:-A-Python-module-for-virtual-stock-trading">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>The aim of this coursework is to code a Python 3 module <code>stocktrader</code> that allows the user to load historical financial data and to simulate the buying and selling of shares on the stock market. <em>Shares</em> represent a fraction of ownership in a company and the total of all shares form the <em>stock</em> of that company. Shares can be bought and sold on the stock market at a price that varies daily. A reasonable investor aims to buy cheap shares and sells them when the price is higher. The actions of buying and selling shares are referred to as <em>transactions</em>. Transactions usually incur <em>transaction fees</em>, but we will not consider these in this project.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Frequently-asked-questions">Frequently asked questions<a class="anchor-link" href="#Frequently-asked-questions">&#182;</a></h2><h3 id="What-can/cannot-be-used-for-this-coursework?">What can/cannot be used for this coursework?<a class="anchor-link" href="#What-can/cannot-be-used-for-this-coursework?">&#182;</a></h3><p>The Python knowledge contained in the lecture notes is essentially sufficient to complete this project. While you are allowed to consult the web for getting ideas about how to solve a specific problem, the most straightforward solution may already be in the lecture notes. You are also allowed to use online sources, but you must clearly indicate copy-and-pasted code like so:</p>
+
+<pre><code>   # the following 3 lines follow a similar code on 
+   # http://webaddress.org/somecode.htm as retrieved on 24/04/2018</code></pre>
+<div class="alert alert-block alert-warning" style="font-weight:bold">
+Let’s be clear about what is *not* allowed:
+
+<font color=red>You are NOT allowed to send, give, or receive Python code to/from classmates and others.</font> 
+</div><p>This project is the equivalent of a standard exam and it counts 70% towards your final mark. Consequently, the standard examination rules apply to this project.</p>
+<p>Once your Python module is submitted via the Blackboard system, it will undergo plagiarism tests:</p>
+<ol>
+<li>The turn-it-in system automatically checks for similarities in the codes among all students (without syntactical comparisons).</li>
+<li>Your lecturer compares the syntax of all submitted codes (interestingly, with the help of another Python program). Hence, refrain from communicating any code with others. </li>
+</ol>
+<p><div class="alert alert-block alert-warning" style="font-weight:bold">
+Note that even if you are the originator of the work (and not the one who copied), the University Guidelines Plagiarism and Academic Malpractice (link below) require that you will be equally responsible for this case of academic malpractice and may lose all marks on the coursework (or even be assigned 0 marks for the overall course).
+</div>
+<br>
+ <em>Link to the guidelines:</em>  <a href="https://documents.manchester.ac.uk/DocuInfo.aspx?DocID=2870">University Guidelines Plagiarism and Academic Malpractice</a></p>
+<h3 id="How-is-this-coursework-assessed?">How is this coursework assessed?<a class="anchor-link" href="#How-is-this-coursework-assessed?">&#182;</a></h3><p>There are several factors that enter the assessment:</p>
+<ul>
+<li>First, it will be checked whether you have followed the tasks and format specified below, using the prescribed function names, variable names, and data structures.</li>
+<li>Second, your module will be tested manually by performing a number of predefined transactions, loading/saving a couple of portfolios, and testing trading strategies.</li>
+<li>Further, all module functions will be tested automatically by another Python program (so-called unit testing). This is why it is important that your module "does not do anything" when it is imported into another program, and that you strictly follow the format of the functions specified in the tasks below (otherwise some of the tests may fail and you may lose marks).</li>
+<li>It is also checked whether each function/line of code is free of bugs and the program runs without crashing. Functionality will be the main factor in the assessment.</li>
+<li>It will be tested if your functions react to exceptional inputs in an appropriate manner (using Exceptions). It should be impossible to crash the code.</li>
+<li>Make sure that your module is properly documented, and that all functions have meaningful docstrings. In particular, each function must explain its own inputs and returned values so that there is no room for misinterpretation. </li>
+<li>Further marks will be given on the code efficiency and strategy. </li>
+</ul>
+<h3 id="When-and-how-to-submit-the-coursework?">When and how to submit the coursework?<a class="anchor-link" href="#When-and-how-to-submit-the-coursework?">&#182;</a></h3><p>The coursework can be completed and submitted as a single Python module named <code>stocktrader.py</code>. The submission is via Blackboard and <strong>the strict deadline is Thursday, May 10th, at 1pm.</strong> You can resubmit your coursework as often as you like, but only the last submission counts. <strong>Submissions after the deadline will not be accepted.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-0:-Prepare-the-module-and-understand-the-data-structures">Task 0: Prepare the module and understand the data structures<a class="anchor-link" href="#Task-0:-Prepare-the-module-and-understand-the-data-structures">&#182;</a></h2><p><strong><a href="coursework.zip">Download the coursework.zip file</a></strong> and unzip the folder to a convenient location on your computer (e.g., your Desktop). The folder already contains a template for your <code>stocktrader.py</code> module. Your whole coursework project can be completed using this module. You "only" need to replace the TODO comments with the actual code. Make sure that all code is contained in functions so your module "does not do anything" when it is imported into another Python program.</p>
+<p><strong>Module template:</strong></p>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">stocktrader -- A Python module for virtual stock trading</span>
+<span class="sd">TODO: Add a description of the module...</span>
+<span class="sd">Also fill out the personal fields below.</span>
+
+<span class="sd">Full name: Peter Pan</span>
+<span class="sd">StudentId: 123456</span>
+<span class="sd">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f68693829384d8869798b685828392939882d89b9798959e9385829384d89795d8839d">[email&#160;protected]</a></span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">TransactionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">DateError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">stocks</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">portfolio</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">transactions</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">normaliseDate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> 
+    <span class="c1"># TODO</span>
+
+<span class="c1"># TODO: All other functions from the tasks go here</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Test your functions here</span>
+
+<span class="c1"># the following allows your module to be run as a program</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span> <span class="ow">or</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;builtins&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+<p><strong>CSV data:</strong></p>
+<ul>
+<li><p>The coursework folder also contains the files <code>portfolio0.csv</code> and <code>portfolio.csv</code> in the same location as the <code>stocktrader.py</code> file.</p>
+</li>
+<li><p>In the subfolder <code>stockdata</code> you will find ten CSV files containing historic stock prices of different companies.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The module <code>stocktrader</code> uses three essential data structures as explained below.</p>
+<h3 id="The-stocks-dictionary">The <code>stocks</code> dictionary<a class="anchor-link" href="#The-stocks-dictionary">&#182;</a></h3><p>The dictionary <code>stocks</code> stores historic financial data that your module can work with. The data for <code>stocks</code> is located in the <code>stockdata</code> subfolder, with each file of the form <code>SYMBOL.csv</code> corresponding to a particular company. Every entry in the <code>stocks</code> dictionary is a key-value pair. Each key is a string corresponding to a symbol and the value is again a dictionary.</p>
+<p>The dictionaries in <code>stocks</code> contain key-value pairs where the key (a string) corresponds to a date in the form <code>YYYY-MM-DD</code>and the value is a list of floating point numbers <code>[ Open, High, Low, Close ]</code> corresponding to the prices of a stock at that particular date.</p>
+<p>Here is an excerpt of a valid stocks dictionary containing data for the symbol <code>EZJ</code> (easyJet plc) and <code>SKY</code> (Sky plc):</p>
+
+<pre><code>stocks = {
+  'EZJ' : {
+    '2012-01-03' : [435.273010, 435.273010, 425.050995, 434.835999],
+    '2012-01-04' : [434.618011, 434.618011, 423.273010, 428.072998],
+    '2012-01-05' : [430.472992, 430.472992, 417.273010, 418.364014],
+    ...
+  },
+  'SKY' : { 
+    '2012-01-03' : [751.000000, 755.500000, 731.500000, 742.000000],
+    '2012-01-04' : [740.000000, 741.125000, 718.000000, 730.000000],
+    '2012-01-05' : [733.500000, 735.500000, 719.500000, 721.000000],
+    ...
+  },
+}</code></pre>
+<p>The interpretation of this data at an example is as follows: on the 4rd of January 2012 the price of a Sky share ranged between £718.00 (the "low") and £741.125 (the "high").</p>
+<h3 id="The-portfolio-dictionary">The <code>portfolio</code> dictionary<a class="anchor-link" href="#The-portfolio-dictionary">&#182;</a></h3><p><code>portfolio</code> is a dictionary that represents our capital at a given date. Our capital is the combination of cash and the shares that you hold. The keys in <code>portfolio</code> are strings <code>date</code>, <code>cash</code>, and arbitrarily many symbols. The respective values are the date of the last transaction performed on the portfolio in the form <code>YYYY-MM-DD</code>, the cash amount as a floating point number, and the integer number of shares held for each symbol.</p>
+<p>Here's an example of a valid portfolio dictionary:</p>
+
+<pre><code>portfolio = { 
+    'date' : '2013-11-27',
+    'cash' : 12400.45,
+    'EZJ' : 10
+}</code></pre>
+<p>The interpretation of this is as follows: on the 27th of November 2013 we have £12,400.45 in cash and we own 10 shares of easyJet. We could now look up in the <code>stocks</code> dictionary that the <em>low price</em> of easyJet on that day is £1426.00. Hence, if we sold all 10 easyJet shares on this day, we'd have £12,400.45 + 10 x £1426.00 = £26,660.45 of cash and no more <code>EZJ</code> shares. In this case the <code>portfolio</code> dictionary would only have two keys, <code>date</code> and <code>cash</code>.</p>
+<h3 id="The-transactions-list">The <code>transactions</code> list<a class="anchor-link" href="#The-transactions-list">&#182;</a></h3><p><code>transactions</code> is a list of dictionaries, with each dictionary corresponding to a buy/sell transaction on our portfolio. Here is an example of a valid transactions list:</p>
+
+<pre><code>transactions = [ 
+    { 'date' : '2013-08-11', 'symbol' : 'SKY', 'volume' : -5 }, 
+    { 'date' : '2013-08-21', 'symbol' : 'EZJ', 'volume' : 10 } 
+]</code></pre>
+<p>The interpretation of this is as follows: on 11th of August 2013 we <strong>sold</strong> 5 shares of Sky (because <code>volume</code> is negative), and on the 21st of August 2013 we <strong>bought</strong> 10 shares of easyJet (because <code>volume</code> is positive). The value of <code>volume</code> is always an integer, and the <code>date</code> values are chronological: while there can be two or more neighboring list entries in <code>transactions</code> having the same date, the following ones can never have an earlier date. This makes sense as the time order of transactions is important.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-1:-function-normaliseDate(s)">Task 1: function <code>normaliseDate(s)</code><a class="anchor-link" href="#Task-1:-function-normaliseDate(s)">&#182;</a></h2><p>Write a function <code>normaliseDate(s)</code> which takes as input a string <code>s</code> and <em>returns</em> a date string of the form <code>YYYY-MM-DD</code>. The function should accept the following input formats: <code>YYYY-MM-DD</code>, <code>YYYY/MM/DD</code> and <code>DD.MM.YYYY</code>, where <code>DD</code> and <code>MM</code> are integers with one or two digits (the day and/or month can be given with or without a leading <code>0</code>), and <code>YYYY</code> is a four-digit integer. The function converts all of these formats to <code>YYYY-MM-DD</code>.</p>
+<p>If the conversion of the format fails (i.e., it is not exactly in any of the formats specified above), the function raises a <code>DateError</code> exception.</p>
+<p>Note that this function is only about <em>conversion of formats</em>, and there is no need to check whether the date <code>YYYY-MM-DD</code> actually exists.</p>
+<p><strong>Example:</strong> Both <code>normaliseDate('08.5.2012')</code> and <code>normaliseDate('2012/05/8')</code> should return the string <code>2012-05-08</code>, while <code>normaliseDate('8.5.212')</code> should raise a <code>DateError</code> exception.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-2:-function-loadStock(symbol)">Task 2: function <code>loadStock(symbol)</code><a class="anchor-link" href="#Task-2:-function-loadStock(symbol)">&#182;</a></h2><p>Write a function <code>loadStock(symbol)</code> which takes as input a string <code>symbol</code> and loads the historic stock data from the corresponding CSV file (in the <code>stockdata</code> subdirectory) into the dictionary <code>stocks</code>. The function does not need to return anything as the dictionary <code>stocks</code> is in the outer namespace and therefore accessible to the function.</p>
+<p>The CSV files in the <code>stockdata</code> subdirectory are of the following format:</p>
+<ul>
+<li>the first line is the header and can be ignored</li>
+<li>every following line is of the comma-separated form <code>Date,Open,High,Low,Close,AdjClose,Volume</code>, where <code>Date</code> is in any of the formats accepted by the function <code>normaliseDate()</code>, and all other entries are floating point numbers corresponding to prices and trading volumes. Note that only the first values are relevant for filling the <code>stocks</code> dictionary and <code>AdjClose,Volume</code> can be ignored.</li>
+</ul>
+<p>If the file given by <code>symbol</code> cannot be opened (as it is not found), a <code>FileNotFoundError</code> exception should be raised.</p>
+<p>If a line in the CSV file is of an invalid format, a <code>ValueError</code> exception should be raised.</p>
+<p><strong>Example:</strong> <code>loadStock('EZJ')</code> should load the easyJet data from the file <code>stockdata/EZJ.csv</code> into the dictionary <code>stocks</code>, whereas <code>loadStock('XYZ')</code> should raise a <code>FileNotFoundError</code> exception.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-3:-function-loadPortfolio(fname)">Task 3: function <code>loadPortfolio(fname)</code><a class="anchor-link" href="#Task-3:-function-loadPortfolio(fname)">&#182;</a></h2><p>Write a function <code>loadPortfolio(fname)</code> which takes a input a string <code>fname</code> corresponding to the name of a CSV file in the same directory as <code>stocktrader.py</code>. The function loads the data from the file and assigns them to the <code>portfolio</code> dictionary, with all entries of the form described above (including the date!).</p>
+<p>Make sure that <code>portfolio</code> is emptied before new data is loaded into it, and that the list <code>transactions</code> is emptied as well.</p>
+<p>The function does not need to return anything as the dictionary <code>portfolio</code> is in the outer namespace and therefore accessible to the function. If no filename is provided, the name <code>portfolio.csv</code> should be assumed.</p>
+<p>As the <code>loadPortfolio(fname)</code> function goes through the list of shares in the CSV file, it should use the function <code>loadStock(symbol)</code> from Task 2 to load the historic stock data for each <code>symbol</code> it encounters.</p>
+<p>A valid portfolio CSV file is of the following form:</p>
+<ul>
+<li>the first line contains the date of the portfolio in any of the forms accepted by the function <code>normaliseDate()</code> </li>
+<li>the second line contains the cash in the portfolio, a nonnegative floating point number</li>
+<li>the following lines (if present) are of the form <code>symbol,volume</code>. Here, <code>symbol</code> is the symbol of a stock and <code>volume</code> is an integer corresponding to the number of shares.</li>
+</ul>
+<p>Here is an example of a portfolio.csv file:</p>
+
+<pre><code>2012/1/16
+20000
+SKY,5
+EZJ,8</code></pre>
+<p>If the file specified by <code>fname</code> cannot be opened (as it is not found), a <code>FileNotFoundError</code> exception should be raised.</p>
+<p>If a line in the file is of an invalid format, a <code>ValueError</code> exception should be raised.</p>
+<p><strong>Example:</strong> <code>loadPortfolio()</code> should empty the dictionary <code>portfolio</code> and the list <code>transactions</code>, and then load the data from portfolio.csv into the dictionary <code>portfolio</code>, as well as the corresponding stock data into the dictionary <code>stocks</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-4:-function-valuatePortfolio(date,-verbose)">Task 4: function <code>valuatePortfolio(date, verbose)</code><a class="anchor-link" href="#Task-4:-function-valuatePortfolio(date,-verbose)">&#182;</a></h2><p>Write a function <code>valuatePortfolio(date, verbose)</code> with two <em>named parameters</em> <code>date</code> and <code>verbose</code>. The function valuates the portfolio at a given date and <em>returns</em> a floating point number corresponding to its total value. The parameter <code>date</code> is any string accepted by the <code>normaliseDate()</code> function and when it is not provided, the date of the <code>portfolio</code> is used. The parameter <code>verbose</code> is a Boolean value which is <code>False</code> by default. When the function is called with <code>verbose=True</code> it should still return the total value of the portfolio but also print to the console a table of all capital with the current <em>low</em> prices of all shares, as well as the total value.</p>
+<p><strong>Example:</strong> With the <code>portfolio.csv</code> example given in Task 3, a call to <code>valuatePortfolio('2012-2-6')</code> should return the floating point number <code>27465.372072...</code>. When <code>valuatePortfolio('2012-2-6', True)</code> is called, it should also print a table like this:</p>
+
+<pre><code> Your portfolio on 2012-02-06:
+ [* share values based on the lowest price on 2012-02-06]
+
+ Capital type          | Volume | Val/Unit* | Value in £*
+-----------------------+--------+-----------+-------------
+ Cash                  |      1 |  20000.00 |    20000.00
+ Shares of SKY         |      5 |    686.50 |     3432.50
+ Shares of EZJ         |      8 |    504.11 |     4032.87
+-----------------------+--------+-----------+-------------
+ TOTAL VALUE                                     27465.37</code></pre>
+<p><strong>Note 1:</strong> For the valuation we use the <em>low prices</em> of Sky and easyJet on <code>date</code>, in this case the 6th of February 2012. This is to be on the safe side: if we were selling the shares on that day, we would <em>at least</em> get those prices.</p>
+<p><strong>Note 2:</strong> A call to <code>valuatePortfolio(date)</code> should raise <code>DateError</code> exceptions in two cases:</p>
+<ul>
+<li><p>When <code>date</code> is earlier than the date of the portfolio, there might have been transactions afterwards and we no longer know what was the value back then. For example, <code>valuatePortfolio('2012-1-3')</code> should fail if the portfolio is already dated <code>2012-02-06</code>.</p>
+</li>
+<li><p>When <code>date</code> is not a trading day (e.g., a bank holiday or weekend) the CSV files will not contain any price for it and hence we cannot look up the values of shares. For example, <code>valuatePortfolio('2012-2-12')</code> should fail for that reason.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-5:-function-addTransaction(trans,-verbose)">Task 5: function <code>addTransaction(trans, verbose)</code><a class="anchor-link" href="#Task-5:-function-addTransaction(trans,-verbose)">&#182;</a></h2><p>Write a function <code>addTransaction(trans, verbose)</code> which takes as input a dictionary <code>trans</code> corresponding to a buy/sell transaction on our portfolio and an optional Boolean variable <code>verbose</code> (which is <code>False</code> by default). The dictionary <code>trans</code> has three items as follows:</p>
+<ul>
+<li>the key <code>date</code> whose value is any string accepted by the function normaliseDate()</li>
+<li>the key <code>symbol</code> whose value is a string corresponding to the symbol of a stock</li>
+<li>the key <code>volume</code> whose value is an integer corresponding to the number of shares to buy or sell.</li>
+</ul>
+<p><strong>Example:</strong> Here are two valid transaction dictionaries, the first one for selling 5 shares of Sky on 12th of August 2013, and the second for buying 10 shares of easyJet on the 21st of August 2013.</p>
+<div class="highlight"><pre><span></span><span class="p">{</span> <span class="s1">&#39;date&#39;</span> <span class="p">:</span> <span class="s1">&#39;2013-08-12&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span> <span class="p">:</span> <span class="s1">&#39;SKY&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">5</span> <span class="p">},</span> 
+<span class="p">{</span> <span class="s1">&#39;date&#39;</span> <span class="p">:</span> <span class="s1">&#39;21.08.2013&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span> <span class="p">:</span> <span class="s1">&#39;EZJ&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span> <span class="p">:</span> <span class="mi">10</span> <span class="p">}</span>
+</pre></div>
+<p>A call to the <code>addTransaction(trans)</code> function should</p>
+<ul>
+<li>update the <code>portfolio</code> value for <code>cash</code> </li>
+<li>insert, update, or delete the number of shares </li>
+<li>update the date of <code>portfolio</code> to the date of the transaction</li>
+<li>append <code>trans</code> to the list <code>transactions</code>.</li>
+</ul>
+<p>To be on the safe side, we always assume to <strong>sell at the daily low price</strong> and <strong>buy at the daily high price</strong>.</p>
+<p>The <code>addTransaction(trans)</code> function does not need to return any values as both <code>portfolio</code> and <code>transactions</code> are available in the outer namespace and therefore accessible to the function.</p>
+<p>If the optional Boolean parameter <code>verbose=True</code> the function should print to the console an informative statement about the performed transaction.</p>
+<p><strong>Example:</strong> The call</p>
+<div class="highlight"><pre><span></span><span class="n">addTransaction</span><span class="p">({</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="s1">&#39;2013-08-12&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span><span class="p">:</span><span class="s1">&#39;SKY&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span> <span class="p">},</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+<p>should print something like</p>
+
+<pre><code>&gt; 2013-08-12: Sold 5 shares of SKY for a total of £4182.50
+  Available cash: £24182.50</code></pre>
+<p><strong>Exceptions:</strong> The function <code>addTransaction(trans)</code> may fail for several reasons, in which case both <code>portfolio</code> and <code>transactions</code> should remain unchanged and the appropriate exception should be raised:</p>
+<ul>
+<li>if the <code>date</code> of the transaction is earlier than the date of the portfolio, a <code>DateError</code> exception should be raised (i.e., one cannot insert any transactions prior to the last one)</li>
+<li>if the <code>symbol</code> value of the transaction is not listed in the stocks dictionary, a <code>ValueError</code> exception should be raised</li>
+<li>if the <code>volume</code> is such that we either do not have enough cash to perform a buying transaction or we do not have enough (or none at all) shares to perform a selling transaction, a <code>TransactionError</code> exception should be raised.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-5.5:-Take-a-break-and-enjoy">Task 5.5: Take a break and enjoy<a class="anchor-link" href="#Task-5.5:-Take-a-break-and-enjoy">&#182;</a></h2><p>When you arrive here, it's time to take a break and test your code extensively. You should now be able to use your module to load portfolio and stock data files into your computers memory, print the value of your portfolio, and perform buying and selling transactions. For example, if you create a <code>test_stocktrader.py</code> file (or use the one in the coursework.zip folder) the following code should now work:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">stocktrader</span> <span class="kn">as</span> <span class="nn">s</span>
+<span class="n">s</span><span class="o">.</span><span class="n">loadPortfolio</span><span class="p">()</span>
+<span class="n">val1</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">valuatePortfolio</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">trans</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="s1">&#39;2013-08-12&#39;</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span><span class="p">:</span><span class="s1">&#39;SKY&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span> <span class="p">}</span>
+<span class="n">s</span><span class="o">.</span><span class="n">addTransaction</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">val2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">valuatePortfolio</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hurray, we have increased our portfolio value by £{:.2f}!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val2</span><span class="o">-</span><span class="n">val1</span><span class="p">))</span>
+</pre></div>
+<p>The console output should be something like this:</p>
+
+<pre><code> Your portfolio on 2012-01-16:
+ [* share values based on the lowest price on 2012-01-16]
+
+ Capital type          | Volume | Val/Unit* | Value in £*
+-----------------------+--------+-----------+-------------
+ Cash                  |      1 |  20000.00 |    20000.00
+ Shares of SKY         |      5 |    677.50 |     3387.50
+ Shares of EZJ         |      8 |    429.93 |     3439.42
+-----------------------+--------+-----------+-------------
+ TOTAL VALUE                                     26826.92
+
+
+&gt; 2013-08-12: Sold 5 shares of SKY for a total of £4182.50
+  Available cash: £24182.50
+
+
+ Your portfolio on 2013-08-12:
+ [* share values based on the lowest price on 2013-08-12]
+
+ Capital type          | Volume | Val/Unit* | Value in £*
+-----------------------+--------+-----------+-------------
+ Cash                  |      1 |  24182.50 |    24182.50
+ Shares of EZJ         |      8 |   1327.35 |    10618.80
+-----------------------+--------+-----------+-------------
+ TOTAL VALUE                                     34801.30
+
+
+Hurray, we have increased our portfolio value by £7974.38!</code></pre>
+<p>Before moving on to the final tasks, make sure that all the functions of Tasks 1-5 work as expected, that all calculations are correct, and that the appropriate exceptions are raised whenever a problem occurs. The following tasks will rely on these core functions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-6:-function-savePortfolio(fname)">Task 6: function <code>savePortfolio(fname)</code><a class="anchor-link" href="#Task-6:-function-savePortfolio(fname)">&#182;</a></h2><p>Write a function <code>savePortfolio(fname)</code> that saves the current dictionary <code>portfolio</code> to a CSV file with name <code>fname</code> (a string). The file should be saved in the same directory as the <code>stocktrader.py</code> module. If no filename is provided, the name <code>portfolio.csv</code> should be assumed.</p>
+<p>The function does not need to return anything.</p>
+<p><strong>Example:</strong> <code>savePortfolio('portfolio1.csv')</code> should store the values of the <code>portfolio</code> in the file <code>portfolio1.csv</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-7:-function-sellAll(date,-verbose)">Task 7: function <code>sellAll(date, verbose)</code><a class="anchor-link" href="#Task-7:-function-sellAll(date,-verbose)">&#182;</a></h2><p>Write a function <code>sellAll(date, verbose)</code> that sells all shares in the portfolio on a particular date. Here, <code>date</code> is an optional string of any format accepted by the function <code>normaliseDate()</code> and <code>verbose</code> is an optional Boolean variable which is <code>False</code> by default. If <code>verbose=True</code> all selling transactions are printed to the command line. If <code>date</code> is not provided, the date of the portfolio is assume for the sell out.</p>
+<p><strong>Note:</strong> You should be able to use a simple loop with the function <code>addTransaction(trans, verbose)</code> for this task.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-8:-function-loadAllStocks()">Task 8: function <code>loadAllStocks()</code><a class="anchor-link" href="#Task-8:-function-loadAllStocks()">&#182;</a></h2><p>Write a function <code>loadAllStocks()</code> which loads all historic stock data from the stockdata subdirectory into the dictionary <code>stocks</code>. The function does not need to return anything as the dictionary <code>stocks</code> is in the outer namespace and therefore accessible to the function.</p>
+<p>If the loading of one of the files in the stockdata subdirectory fails, this file should simply be ignored. The coursework.zip folder contains an invalid file <code>invalidcsv/PPB.csv</code> which you can use for testing this.</p>
+<p><strong>Note:</strong> You should be able to use a simple loop with the function <code>loadStock(symbol)</code> for this task. You may want to use the <a href="https://docs.python.org/3.6/library/os.html"><code>os</code> module</a> for getting a list of all files in a directory.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-9:-function-tradeStrategy1(verbose)">Task 9: function <code>tradeStrategy1(verbose)</code><a class="anchor-link" href="#Task-9:-function-tradeStrategy1(verbose)">&#182;</a></h2><p>Write a function <code>tradeStrategy1(verbose)</code> that goes through all trading days in the dictionary <code>stocks</code> and buys and sells shares automatically. The strategy is as follows:</p>
+<ul>
+<li>The earliest buying decision is either on the date of the portfolio or the tenth available trading day in <code>stock</code> (whichever is later)</li>
+<li>At any time, we buy the highest possible volume of a stock given the available cash. </li>
+<li>When shares have been bought, no other shares will be bought until all shares from the previous buying transaction are sold again.</li>
+<li>All shares from a previous buying transaction are sold at once, so it's a simple "buy as much as possible &amp; sell all" procedure.</li>
+<li>If shares a being sold on trading day <code>j</code> we will only consider buying new shares on the following trading day, <code>j+1</code>. </li>
+</ul>
+<p>Assume that <code>j</code> is the index of the current trading day, then we will find the stock to buy as follows:</p>
+<ul>
+<li><p>For each stock <code>s</code> available in <code>stocks</code> evaluate the quotient</p>
+
+<pre><code>  Q_buy(s,j) = 10*H(s,j) / (H(s,j) + H(s,j-1) + H(s,j-2) + ... + H(s,j-9))</code></pre>
+<p>where <code>H(s,j)</code> is the <em>high price</em> of stock <code>s</code> at the <code>j</code>-th trading day. Note that <code>Q_buy(s,j)</code> is large when the <em>high price</em> of stock <code>s</code> on trading day <code>j</code> is large compared the average of all previous ten high prices (including the current). This means we might enter a phase of price recovery.</p>
+</li>
+<li><p>Find the maximal quotient <code>Q_buy(s,j)</code> among all stocks <code>s</code> and buy a largest possible volume <code>v</code> of the corresponding stock on trading day <code>j</code>. (It might not be possible to buy any as there might not be enough cash left; in this case do nothing on trading day <code>j</code> and move to the next. If two or more stocks have exactly the same quotient, take the one whose symbol comes first in lexicographical order.)</p>
+</li>
+<li><p>Note that, as usual, our buying decision is based on the <em>high price.</em></p>
+</li>
+</ul>
+<p>If we have automatically bought <code>v</code> shares of a stock <code>s</code> on trading day <code>j</code>, then from trading day <code>k = j+1</code> onwards we will consider selling all of it as follows:</p>
+<ul>
+<li><p>On trading day <code>k = j+1, j+2, ...</code> calculate the quotient</p>
+
+<pre><code>  Q_sell(k) = L(s,k) / H(s,j),</code></pre>
+<p>where <code>L(s,k)</code> corresponds to the <em>low price</em> of stock <code>s</code> on trading day <code>k</code>. This quotient is high if the current <em>low value</em> of the stock is large compared to the <em>high value</em> to which we bought it.</p>
+</li>
+<li><p>Sell all <code>v</code> shares of <code>s</code> on day <code>k</code> if <code>Q_sell(k) &lt; 0.7</code> (we already lost at least 30%, let's get rid of these shares!) or if <code>Q_sell(k) &gt; 1.3</code> (we made a profit of at least 30%, time to cash in!).</p>
+</li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>For solving this task it might be useful to first extract a list of all trading days from the <code>stocks</code> dictionary:
+<pre><code>  lst = [ '2012-01-03', '2012-01-04', ..., '2018-03-13' ]</code></pre>
+You can assume that all loaded stocks in the <code>stocks</code> dictionary can be traded on exactly the same days, and that there is at least one stock in that dictionary.</li>
+<li>All buying and selling transactions should be performed using the <code>addTransaction(trans, verbose)</code> function from Task 5. The <code>verbose</code> parameter of <code>tradeStrategy1(verbose)</code> can just be handed over to <code>addTransaction(trans, verbose)</code>.</li>
+</ul>
+<p><strong>Example:</strong> The following code loads a portfolio of £20,000 cash (and no shares) on the 1st of January 2012, runs the <code>tradeStrategy1(verbose=True)</code> until the end of available data, and valuates the portfolio on the 13th of March 2018.</p>
+<div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">loadPortfolio</span><span class="p">(</span><span class="s1">&#39;portfolio0.csv&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">loadAllStocks</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">valuatePortfolio</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">tradeStrategy1</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">valuatePortfolio</span><span class="p">(</span><span class="s1">&#39;2018-03-13&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+<p>The console output is as follows:</p>
+
+<pre><code> Your portfolio on 2012-01-01:
+ [* share values based on the lowest price on 2012-01-01]
+
+ Capital type          | Volume | Val/Unit* | Value in £*
+-----------------------+--------+-----------+-------------
+ Cash                  |      1 |  20000.00 |    20000.00
+-----------------------+--------+-----------+-------------
+ TOTAL VALUE                                     20000.00
+
+&gt; 2012-01-16: Bought 29 shares of PRU for a total of £19517.00
+  Remaining cash: £483.00
+&gt; 2012-11-21: Sold 29 shares of PRU for a total of £25520.00
+  Available cash: £26003.00
+&gt; 2012-11-22: Bought 37 shares of EZJ for a total of £25696.50
+  Remaining cash: £306.50
+&gt; 2013-01-25: Sold 37 shares of EZJ for a total of £33633.00
+  Available cash: £33939.50
+&gt; 2013-01-28: Bought 35 shares of EZJ for a total of £33103.00
+  Remaining cash: £836.50
+&gt; 2013-05-21: Sold 35 shares of EZJ for a total of £43120.00
+  Available cash: £43956.50
+&gt; 2013-05-22: Bought 34 shares of EZJ for a total of £43905.22
+  Remaining cash: £51.28
+&gt; 2014-01-22: Sold 34 shares of EZJ for a total of £58208.00
+  Available cash: £58259.28
+&gt; 2014-01-23: Bought 18 shares of BATS for a total of £57456.00
+  Remaining cash: £803.28
+&gt; 2016-04-08: Sold 18 shares of BATS for a total of £74853.00
+  Available cash: £75656.28
+&gt; 2016-04-11: Bought 68 shares of SMIN for a total of £75140.00
+  Remaining cash: £516.28
+&gt; 2016-09-29: Sold 68 shares of SMIN for a total of £98532.00
+  Available cash: £99048.28
+&gt; 2016-09-30: Bought 108 shares of SKY for a total of £98594.49
+  Remaining cash: £453.79
+&gt; 2018-02-27: Sold 108 shares of SKY for a total of £140400.00
+  Available cash: £140853.79
+&gt; 2018-02-28: Bought 104 shares of SKY for a total of £140192.00
+  Remaining cash: £661.79
+
+ Your portfolio on 2018-03-13:
+ [* share values based on the lowest price on 2018-03-13]
+
+ Capital type          | Volume | Val/Unit* | Value in £*
+-----------------------+--------+-----------+-------------
+ Cash                  |      1 |    661.79 |      661.79
+ Shares of SKY         |    104 |   1316.00 |   136864.00
+-----------------------+--------+-----------+-------------
+ TOTAL VALUE                                    137525.79</code></pre>
+<p>Not bad! In a bit more than six years we have multiplied our initial investment of £20,000 by a factor of almost seven. I am now quitting my job as a lecturer, but promise to still mark your coursework in my new house on the Cayman Islands...</p>
+<p><img src="dagobert.jpg" alt="Bahamas"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-10-(optional):-function-tradeStrategy2(verbose)">Task 10 (optional): function <code>tradeStrategy2(verbose)</code><a class="anchor-link" href="#Task-10-(optional):-function-tradeStrategy2(verbose)">&#182;</a></h2><p>When you modify the start date of your portfolio, or remove some of the stocks from the available data, you will see that <code>tradeStrategy1()</code> is not very robust and we've just been lucky to make so much profit. Also, it is kind of strange that we repeatedly sell and then immediately buy the same stock. This doesn't seem to make much sense. In some cases, this strategy results in big loses.</p>
+<p>Can you write your own <code>tradeStrategy2(verbose)</code> function that performs better?</p>
+<p>The conditions are as follows:</p>
+<ul>
+<li><code>tradeStrategy2(verbose)</code> should only perform transactions via the function <code>addTransaction(trans,verbose)</code> </li>
+<li><code>tradeStrategy2(verbose)</code> itself should not modify the dictionaries <code>portfolio</code>, <code>stocks</code> and neither the list <code>transactions</code></li>
+<li><code>tradeStrategy2(verbose)</code> should work on all valid <code>stock</code> and <code>portfolio</code> dictionaries, with different companies than the provided ones and over different time ranges</li>
+<li>on any trading day the buy/sell decision is only based on the price data <code>[ Open, High, Low, Close ]</code> available up to that day (i.e., no information from the future is used for making decisions); no other (external) data should be used</li>
+<li><code>tradeStrategy2(verbose)</code> can (and probably should) "diversify" to reduce the risk, which means that any time it can decide to have shares of more than one stock in the portfolio, or no shares at all</li>
+<li><code>tradeStrategy2(verbose)</code> is not restricted to a single buying or selling transaction per day, and even allowed to buy and sell shares of a stock on the same day (which would however incur a loss because buying is at the daily high price, and selling at the low price)</li>
+<li><code>tradeStrategy2(verbose)</code> should not use any "randomness", i.e., two calls to the function with exactly the same data should result in an indentical list of transactions</li>
+<li><code>tradeStrategy2(verbose)</code> should run reasonably fast, not longer than a couple of seconds on the provided data.</li>
+</ul>
+<p><br></p>
+<div class="alert alert-block alert-warning" style="font-weight:bold">
+This task is optional and will not be part of the formal assessment. However, if your module contains a working `tradeStrategy2(verbose)` function, it will enter a *trading competition.* In this competition I will test your strategy on different stock data and over shorter and longer time intervals. The winners with the three best-performing strategies will be announced on the course website and will receive Amazon vouchers sponsored by Sabisu.
+</div><p><br></p>
+<p><strong>Industry sponsor:</strong> <a href="http://www.sabisu.co/">Sabisu</a> is a Manchester-based software company that provide an operational
+and project intelligence platform for oil &amp; gas and petrochemicals customers (including global leaders like Shell and Sabic). Much of Sabisu's work is related to time series and they use Python for the analytics. Sabisu have a long-standing collaboration with our School of Mathematics and the University in general.</p>
+<p><a href="http://www.sabisu.co" target="_blank"><img src="sabisu.jpg"></a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>End of coursework.</strong></p>
+
+</div>
+</div>
+</div>
+ 
+
+
+    </div>
+  </div>
+
+  </div>
+
+
+  
+    <footer class="footer hidden-print">
+      <div class="container">
+        <div class="col-md-4">
+          <p>
+            This website does not host notebooks, it only renders notebooks
+            available on other websites.
+          </p>
+        </div>
+
+        <div class="col-md-4">
+          <p>
+            Delivered by <a href="http://www.fastly.com/">Fastly</a>,
+            Rendered by <a href="https://developer.rackspace.com/?nbviewer=awesome">Rackspace</a>
+          </p>
+          <p>
+            nbviewer GitHub <a href="https://github.com/jupyter/nbviewer">repository</a>.
+          </p>
+        </div>
+
+        <div class="col-md-4">
+          
+  
+            
+              <p>
+                nbviewer version:
+                <a href="https://github.com/jupyter/nbviewer/commit/67ee47e55fa697614e03aa060a86019f75f2ddca">
+                  67ee47e
+                </a>
+              </p>
+            
+          
+  
+  <p>
+    nbconvert version: <a href="https://github.com/jupyter/nbconvert/releases/tag/5.3.1">
+      5.3.1
+    </a>
+  </p>
+  
+
+          
+  
+  
+  <p>
+    Rendered
+    <span class='date' data-date='Thu, 05 Apr 2018 09:10:24 UTC' title='Thu, 05 Apr 2018 09:10:24 UTC'>(Thu, 05 Apr 2018 09:10:24 UTC)</span>
+  </p>
+  
+
+        </div>
+      </div>
+    </footer>
+  
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script><script src="/static/components/bootstrap/js/bootstrap.min.js?v=5869c96cc8f19086aee625d670d741f9"></script>
+  <script src="/static/components/headroom.js/dist/headroom.min.js?v=b0a311ea668f8e768ea375f4a7abb81c"></script>
+  <script src="/static/components/headroom.js/dist/jQuery.headroom.min.js?v=f3a1bae118315d0c234afc74dc6aab71"></script>
+
+  
+  
+  <script>
+    $(function(){ $("#menubar").headroom({
+      tolerance: 5,
+      offset: 205,
+      classes: {
+        initial: "animated",
+        pinned: "slideInDown",
+        unpinned: "slideOutUp"
+      }
+    })});
+  </script>
+
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-52617120-5', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  <script>
+    require({
+        paths: {
+          moment: "/static/components/moment/min/moment.min.js?v=89f87298ad94aa1e6b92f42eb66da043"
+        }
+      }, ["moment"], function(moment){
+      var date = $("footer .date"),
+        m = moment(new Date(date.data('date'))),
+        update = function(){ date.text(m.fromNow()); };
+      setInterval(update, 61*1000);
+      update();
+      var w = $(window).scroll(function(event){
+        $("body").toggleClass("scrolled", w.scrollTop() > 0);
+      });
+    });
+  </script>
+
+  <!--NEW RELIC Stop Perf Measurement-->
+  
+  <!--NEW RELIC End-->
+</body>
+</html>
