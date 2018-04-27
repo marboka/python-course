@@ -307,6 +307,7 @@ def tradeStrategy1(verbose=False):
     '''
     for symbol in stocks:
         datelist = list(stocks[symbol].keys())
+        datelist.sort()  
         break
     from datetime import datetime
     date_10 = [int(x) for x in datelist[9].split('-')]            #converting dates into datetime format
